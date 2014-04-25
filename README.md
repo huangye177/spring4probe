@@ -3,6 +3,12 @@ spring4probe
 
 ## How to
 
+run from web container:
+
+run from tests:
+
+* gradle clean test
+
 ============
 ## Probe Content
 

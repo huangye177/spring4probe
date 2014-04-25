@@ -1,17 +1,16 @@
+apply plugin: 'war'
+apply plugin: 'tomcat'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-
-apply plugin: 'jetty'
-
-// apply plugin: 'war'
-// apply plugin: 'eclipse-wtp'
-
 //these create the 'provided' scope, mainly for the servlet dependency
 apply plugin: 'propdeps'
 apply plugin: 'propdeps-maven'
 apply plugin: 'propdeps-idea'
 apply plugin: 'propdeps-eclipse'
+
+apply plugin: 'jetty'
+// apply plugin: 'eclipse-wtp'
 
 buildscript {
     repositories {
@@ -23,6 +22,7 @@ buildscript {
     }
   
     dependencies {
+      classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.8'
       classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.1'
     }
   }
@@ -41,6 +41,13 @@ repositories {
 
 dependencies {
 
+    def tomcatVersion = '7.0.42'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+      exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+    
     provided 'javax.servlet:javax.servlet-api:3.0.1'
     
     runtime 'javax.servlet:jstl:1.2'
@@ -89,3 +96,4 @@ task wrapper(type: Wrapper) {
 }
 
 jettyRunWar.contextPath = 'spring4probe'
+tomcatRunWar.contextPath = ''
