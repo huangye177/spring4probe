@@ -1,7 +1,9 @@
 spring4probe
 ============
 
-## Prerequisites Installation
+## Prerequisites 
+
+database installation:
 
 * MongoDB 
 
@@ -9,13 +11,13 @@ spring4probe
 
 ## How to
 
-run from web container:
-
-* `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
-
 run from tests:
 
 * `gradle clean test` (primary test cases: "rest.yummynoodlebar.rest.controller", "data.yummynoodlebar.persistence.integration")
+
+run from web container:
+
+* `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
 
 ============
 ## Probe Content
