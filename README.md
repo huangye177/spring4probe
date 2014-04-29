@@ -1,6 +1,12 @@
 spring4probe
 ============
 
+## Prerequisites Installation
+
+* MongoDB 
+
+* H2
+
 ## How to
 
 run from web container:
@@ -9,7 +15,7 @@ run from web container:
 
 run from tests:
 
-* `gradle clean test` (primary test cases: "*.yummynoodlebar.rest.controller", "*.yummynoodlebar.persistence.integration")
+* `gradle clean test` (primary test cases: "rest.yummynoodlebar.rest.controller", "data.yummynoodlebar.persistence.integration")
 
 ============
 ## Probe Content
