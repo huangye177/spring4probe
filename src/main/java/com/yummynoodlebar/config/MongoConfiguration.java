@@ -9,7 +9,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.yummynoodlebar.persistence.repository.MenuItemRepository;
 
 /*
@@ -18,19 +18,20 @@ import com.yummynoodlebar.persistence.repository.MenuItemRepository;
  */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.yummynoodlebar.persistence.repository",
-        includeFilters = @ComponentScan.Filter(value = { MenuItemRepository.class }, type = FilterType.ASSIGNABLE_TYPE))
+        includeFilters = @ComponentScan.Filter(value = { MenuItemRepository.class },
+                type = FilterType.ASSIGNABLE_TYPE))
 public class MongoConfiguration
 {
 
     public @Bean
-    MongoTemplate mongoTemplate(Mongo mongo) throws UnknownHostException
+    MongoTemplate mongoTemplate(MongoClient mongoClient) throws UnknownHostException
     {
-        return new MongoTemplate(mongo, "yummynoodle");
+        return new MongoTemplate(mongoClient, "yummynoodle");
     }
 
     public @Bean
-    Mongo mongo() throws UnknownHostException
+    MongoClient mongoClient() throws UnknownHostException
     {
-        return new Mongo("localhost");
+        return new MongoClient("localhost");
     }
 }

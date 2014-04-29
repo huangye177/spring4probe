@@ -12,8 +12,10 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = {CoreConfig.class, MVCConfig.class})
 public class MenuItemMappingIntegrationTests
 {
 
@@ -22,7 +24,7 @@ public class MenuItemMappingIntegrationTests
     @Before
     public void setup() throws Exception
     {
-        mongo = new MongoTemplate(new SimpleMongoDbFactory(new Mongo(), "yummynoodle"));
+        mongo = new MongoTemplate(new SimpleMongoDbFactory(new MongoClient(), "yummynoodle"));
 
         mongo.dropCollection("menu");
     }
