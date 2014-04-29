@@ -1,6 +1,9 @@
 package com.yummynoodlebar.persistence.domain;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class Ingredient {
+  @Indexed
   private String name;
   private String description;
 

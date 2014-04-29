@@ -60,8 +60,8 @@ public class OrderPersistenceEventHandler implements OrderPersistenceService {
     }
 
     return new OrderDetailsEvent(
-            requestOrderDetailsEvent.getKey(),
-            order.toOrderDetails());
+        requestOrderDetailsEvent.getKey(),
+        order.toOrderDetails());
   }
 
   @Override

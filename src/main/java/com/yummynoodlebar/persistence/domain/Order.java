@@ -1,19 +1,15 @@
 package com.yummynoodlebar.persistence.domain;
 
 import com.yummynoodlebar.events.orders.OrderDetails;
+import org.springframework.beans.BeanUtils;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Order {
 
   private Date dateTimeOfSubmission;
 
   private Map<String, Integer> orderItems;
-
-  private OrderStatus orderStatus;
 
   private String id;
 
@@ -23,14 +19,6 @@ public class Order {
 
   public void setDateTimeOfSubmission(Date dateTimeOfSubmission) {
     this.dateTimeOfSubmission = dateTimeOfSubmission;
-  }
-
-  public OrderStatus getStatus() {
-    return orderStatus;
-  }
-
-  public void setStatus(OrderStatus orderStatus) {
-    this.orderStatus = orderStatus;
   }
 
   public Date getDateTimeOfSubmission() {
@@ -73,3 +61,4 @@ public class Order {
     return order;
   }
 }
+
