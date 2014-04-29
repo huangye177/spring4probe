@@ -5,11 +5,11 @@ spring4probe
 
 run from web container:
 
-* gradle tomcatRunWar (and visit http://localhost:8080/aggregators/orders to get an empty page with [] through HTTP authentication "http:http")
+* `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
 
 run from tests:
 
-* gradle clean test
+* `gradle clean test`
 
 ============
 ## Probe Content
