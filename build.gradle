@@ -54,6 +54,11 @@ dependencies {
     compile 'org.springframework.security:spring-security-config:3.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-web:3.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-config:3.2.3.RELEASE'
+    // compile 'org.springframework.data:spring-data-mongodb:1.4.1.RELEASE'
+    
+    // compile 'cglib:cglib:3.1'
+    compile 'org.springframework.data:spring-data-mongodb:1.2.3.RELEASE'
+    compile 'cglib:cglib:2.2.2'
     
     provided 'javax.servlet:javax.servlet-api:3.0.1'
     
@@ -87,8 +92,9 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.25'
     compile 'commons-logging:commons-logging:1.1.1'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
-
-    testCompile 'org.springframework:spring-test:4.0.3.RELEASE'
+    
+    testCompile 'org.springframework:spring-test:3.2.3.RELEASE'
+    // testCompile 'org.springframework:spring-test:4.0.3.RELEASE'
     testCompile 'com.jayway.jsonpath:json-path:0.8.1'
     testCompile 'com.jayway.jsonpath:json-path-assert:0.8.1'
     testCompile 'junit:junit:4.+'
