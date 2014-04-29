@@ -9,7 +9,7 @@ run from web container:
 
 run from tests:
 
-* `gradle clean test`
+* `gradle clean test` (primary test cases: "*.yummynoodlebar.rest.controller", "*.yummynoodlebar.persistence.integration")
 
 ============
 ## Probe Content
