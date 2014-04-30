@@ -57,17 +57,17 @@ dependencies {
     compile 'org.springframework.data:spring-data-mongodb:1.4.1.RELEASE'
     compile 'cglib:cglib:3.1'
 
-	//// out-of-date dependencies combination
+    //// out-of-date dependencies combination
     // compile 'org.springframework.data:spring-data-jpa:1.3.4.RELEASE'
     // compile 'org.hibernate:hibernate-entitymanager:4.0.1.Final'
-	// compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
-	// runtime 'com.h2database:h2:1.3.173'
+    // compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
+    // runtime 'com.h2database:h2:1.3.173'
 
-	//// up-of-date dependencies combination
-	compile 'org.springframework.data:spring-data-jpa:1.5.1.RELEASE'
-	compile 'org.hibernate:hibernate-entitymanager:4.3.5.Final'
-	compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
-	runtime 'com.h2database:h2:1.4.177'
+    //// up-of-date dependencies combination
+    compile 'org.springframework.data:spring-data-jpa:1.5.1.RELEASE'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.5.Final'
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    runtime 'com.h2database:h2:1.4.177'
     
     provided 'javax.servlet:javax.servlet-api:3.0.1'
     
