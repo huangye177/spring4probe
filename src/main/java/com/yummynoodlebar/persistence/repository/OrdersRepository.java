@@ -1,14 +1,19 @@
 package com.yummynoodlebar.persistence.repository;
 
+import java.util.List;
+
 import com.yummynoodlebar.persistence.domain.Order;
 
-public interface OrdersRepository {
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
-  Order save(Order order);
-
-  void delete(String key);
-
-  Order findOne(String key);
-
-  Iterable<Order> findAll();
+public interface OrdersRepository extends CrudRepository<Order, String> {
+	
+	  Order findById(String key);
+	  
+	  @Query(value = "select no.* from NOODLE_ORDERS no where no.ORDER_ID in "
+	  		+ "(select ID from ORDER_ORDER_ITEMS where MENU_ID = :menuId)", 
+	  		nativeQuery = true)
+	  List<Order> findOrdersContaining(@Param("menuId") String menuId);
 }
