@@ -19,6 +19,10 @@ run from web container:
 
 * `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
 
+run a GemFire server (start a basic GemFire server with a Region -- a logical partition within GemFire named as 'YummyNoodleOrder'.) 
+
+* `gradle run` (on port 40404)
+
 ============
 ## Probe Content
 
