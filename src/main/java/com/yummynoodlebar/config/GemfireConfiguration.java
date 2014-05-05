@@ -1,5 +1,6 @@
 package com.yummynoodlebar.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -8,6 +9,7 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.yummynoodlebar.persistence.repository.OrderStatusRepository;
+import com.yummynoodlebar.persistence.services.StatusUpdateGemfireNotificationListener;
 
 @Configuration
 /*
@@ -30,5 +32,11 @@ import com.yummynoodlebar.persistence.repository.OrderStatusRepository;
         includeFilters = @ComponentScan.Filter(value = { OrderStatusRepository.class }, type = FilterType.ASSIGNABLE_TYPE))
 public class GemfireConfiguration
 {
+
+    @Bean
+    public StatusUpdateGemfireNotificationListener statusUpdateListener()
+    {
+        return new StatusUpdateGemfireNotificationListener();
+    }
 
 }

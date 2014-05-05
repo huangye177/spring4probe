@@ -16,10 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yummynoodlebar.config.GemfireConfiguration;
 import com.yummynoodlebar.persistence.domain.OrderStatus;
 import com.yummynoodlebar.persistence.domain.fixture.PersistenceFixture;
+import com.yummynoodlebar.persistence.integration.fakecore.FakeCoreConfiguration;
 import com.yummynoodlebar.persistence.repository.OrderStatusRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { GemfireConfiguration.class })
+@ContextConfiguration(classes = { FakeCoreConfiguration.class, GemfireConfiguration.class })
 public class OrderStatusRepositoryIntegrationTests
 {
     /*
