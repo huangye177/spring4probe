@@ -1,17 +1,20 @@
 package com.yummynoodlebar.persistence.repository;
 
-import com.yummynoodlebar.persistence.domain.OrderStatus;
-
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 
-public interface OrderStatusRepository {
+import org.springframework.data.gemfire.repository.GemfireRepository;
+import org.springframework.data.gemfire.repository.Query;
 
-  OrderStatus save(OrderStatus orderStatus);
+import com.yummynoodlebar.persistence.domain.OrderStatus;
 
-  void delete(UUID key);
+/*
+ * The entity/persistence class, in this case OrderStatus, 
+ * requires annotating to control how it is persisted into the data store
+ */
+public interface OrderStatusRepository extends GemfireRepository<OrderStatus, UUID>
+{
 
-  OrderStatus findLatestById(UUID key);
-
-  List<OrderStatus> findAll();
+    @Query("SELECT DISTINCT * FROM /YummyNoodleOrder WHERE orderId = $1 ORDER BY statusDate")
+    public Collection<OrderStatus> getOrderHistory(UUID orderId);
 }

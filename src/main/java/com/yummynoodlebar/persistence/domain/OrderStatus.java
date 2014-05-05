@@ -1,47 +1,71 @@
 package com.yummynoodlebar.persistence.domain;
 
-import com.yummynoodlebar.events.orders.OrderStatusDetails;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class OrderStatus {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.gemfire.mapping.Region;
 
-  private UUID orderId;
-  private UUID id;
-  private Date statusDate;
-  private String status;
+import com.yummynoodlebar.events.orders.OrderStatusDetails;
 
-  public OrderStatus(UUID orderId, UUID id, final Date date, final String status) {
-    this.orderId = orderId;
-    this.id = id;
-    this.status = status;
-    this.statusDate = date;
-  }
+/*
+ * configuring the default Region and specifying the property to use as the Region key/ID
+ */
+@Region("YummyNoodleOrder")
+public class OrderStatus implements Serializable
+{
 
-  public Date getStatusDate() {
-    return statusDate;
-  }
+    private UUID orderId;
 
-  public String getStatus() {
-    return status;
-  }
+    @Id
+    private UUID id;
 
-  public UUID getOrderId() {
-    return orderId;
-  }
+    private Date statusDate;
+    private String status;
 
-  public UUID getId() {
-    return id;
-  }
+    public OrderStatus(UUID orderId, UUID id, final Date date, final String status)
+    {
+        this.orderId = orderId;
+        this.id = id;
+        this.status = status;
+        this.statusDate = date;
+    }
 
-  public OrderStatusDetails toStatusDetails() {
-    return new OrderStatusDetails(orderId, id, statusDate, status);
-  }
+    public Date getStatusDate()
+    {
+        return statusDate;
+    }
 
-  public static OrderStatus fromStatusDetails(OrderStatusDetails orderStatusDetails) {
-    return new OrderStatus(
-        orderStatusDetails.getOrderId(), orderStatusDetails.getId(),
-        orderStatusDetails.getStatusDate(), orderStatusDetails.getStatus());
-  }
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public UUID getOrderId()
+    {
+        return orderId;
+    }
+
+    public UUID getId()
+    {
+        return id;
+    }
+
+    public void setId(UUID id)
+    {
+        this.id = id;
+    }
+
+    public OrderStatusDetails toStatusDetails()
+    {
+        return new OrderStatusDetails(orderId, id, statusDate, status);
+    }
+
+    public static OrderStatus fromStatusDetails(OrderStatusDetails orderStatusDetails)
+    {
+        return new OrderStatus(
+                orderStatusDetails.getOrderId(), orderStatusDetails.getId(),
+                orderStatusDetails.getStatusDate(), orderStatusDetails.getStatus());
+    }
 }

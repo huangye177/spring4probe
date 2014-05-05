@@ -11,17 +11,17 @@ database installation:
 
 ## How to
 
-run from tests:
+[Must] run a GemFire server (start a basic GemFire server with a Region -- a logical partition within GemFire named as 'YummyNoodleOrder'.) 
 
-* `gradle clean test` (primary test cases: "rest.yummynoodlebar.rest.controller", "data.yummynoodlebar.persistence.integration")
+* `gradle run` (on port 40404)
 
-run from web container:
+[Optional] run from web container:
 
 * `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
 
-run a GemFire server (start a basic GemFire server with a Region -- a logical partition within GemFire named as 'YummyNoodleOrder'.) 
+run from tests:
 
-* `gradle run` (on port 40404)
+* `gradle clean test` (primary test cases: "rest.yummynoodlebar.rest.controller", "data.yummynoodlebar.persistence.integration")
 
 ============
 ## Probe Content
