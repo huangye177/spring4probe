@@ -1,9 +1,10 @@
 package com.yummynoodlebar.config;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,14 +43,31 @@ public class WebDomainIntegrationTest
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    // @Test
+    // public void thatTextReturned() throws Exception
+    // {
+    // mockMvc.perform(get("/"))
+    // .andDo(print())
+    // .andExpect(content().string(containsString(STANDARD)))
+    // .andExpect(content().string(containsString(CHEF_SPECIAL)))
+    // .andExpect(content().string(containsString(LOW_CAL)));
+    //
+    // }
+
+    @SuppressWarnings("unchecked")
     @Test
-    public void thatTextReturned() throws Exception
+    public void getHome() throws Exception
     {
         mockMvc.perform(get("/"))
                 .andDo(print())
-                .andExpect(content().string(containsString(STANDARD)))
-                .andExpect(content().string(containsString(CHEF_SPECIAL)))
-                .andExpect(content().string(containsString(LOW_CAL)));
+                .andExpect(status().isOk())
+                .andExpect(model().size(2))
+                .andExpect(model().attribute("menuItems", hasSize(3)))
+                // .andExpect(model().attribute("menuItems",
+                // hasItems(hasProperty("name", is(STANDARD)),
+                // hasProperty("name", is(CHEF_SPECIAL)),
+                // hasProperty("name", is(LOW_CAL)))))
+                .andExpect(model().attributeExists("basket"));
 
     }
 
