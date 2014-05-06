@@ -22,8 +22,8 @@ buildscript {
     }
   
     dependencies {
-      classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.8'
-      classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.1'
+      classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.9'
+      classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.6'
     }
   }
 
@@ -113,6 +113,13 @@ dependencies {
     testCompile 'junit:junit:4.+'
     testCompile "org.mockito:mockito-all:1.9.5"
 }
+
+test {
+    testLogging {
+      // Show that tests are run in the command-line output
+      events 'started', 'passed'
+    }
+  }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.10'

@@ -14,21 +14,29 @@ database installation:
 
 ## How to
 
-[ **Must** ] Start MongoDB
+##### [ **Must** ] Start MongoDB
 
 * `mongod`
 
-[ **Must** ] run a GemFire server (start a basic GemFire server with a Region -- a logical partition within GemFire named as 'YummyNoodleOrder'.) 
+##### [ **Must** ] run a GemFire server
 
-* `gradle run` (on port 40404)
+* `gradle run` 
 
-[ Optional ] run from web container:
+start a basic GemFire server with a Region **on port 40404** -- a logical partition within GemFire named as 'YummyNoodleOrder'
 
-* `gradle build tomcatRunWar` (and visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http")
+##### [ Optional ] run from web container:
 
-run from tests:
+* `gradle build tomcatRunWar` 
 
-* `gradle clean test` (primary test cases: "rest.yummynoodlebar.rest.controller", "data.yummynoodlebar.persistence.integration", "com.yummynoodlebar.web.controller")
+(default) visit http://localhost:8080/ 
+
+(alternative by comment `com.yummynoodlebar.config.WebAppInitializer` to ensure use of `rest.yummynoodlebar.config.WebAppInitializer`) visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http"
+
+##### [ Optional/Recommended ] run from tests:
+
+* `gradle clean test` 
+
+primary test cases: `rest.yummynoodlebar.rest.controller`, `data.yummynoodlebar.persistence.integration`, `com.yummynoodlebar.web.controller`
 
 ============
 
@@ -36,8 +44,8 @@ run from tests:
 
 included tutorials:
 
-* "**rest.yummynoodlebar**" RESTful implementation and test with MockMVC/RestTemplate; deployable on Tomcat with Java-based Config; HTTP Basic security [from http://spring.io/guides/tutorials/rest/]
+* "**rest.yummynoodlebar**" RESTful implementation and test with MockMVC/RestTemplate; deployable on Tomcat with Java-based Config via WebApplicationInitializer; HTTP Basic security [from http://spring.io/guides/tutorials/rest/]
 
 * "**data.yummynoodlebar**" MongoDB persistent via MongoTemplate and Spring Data repository hierarchy (e.g., CrudRepository); config class to map to a JPA database, and use Spring Data JPA Repository to store and retrieve data from H2 database; support GemFire by launching a local cache server to save/retreive objects with GemFireTemplate OQL and GemfireRepository; support of calable and event-driven architecture (propagated message across application cluster) with GemFire Continuous Queries [from http://spring.io/guides/tutorials/data/]
 
-* "**com.yummynoodlebar**" SpringMVC based controller and mapping; [from http://spring.io/guides/tutorials/web/]
+* "**com.yummynoodlebar**" SpringMVC based configuration via AbstractAnnotationConfigDispatcherServletInitializer, controller and mapping; [from http://spring.io/guides/tutorials/web/]

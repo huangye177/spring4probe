@@ -19,6 +19,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  * using a web container that supports the Servlet 3 specification such as Tomcat 7+, 
  * it's possible to initialize the underlying web infrastructure for the application 
  * without writing a line of XML.
+ * 
+ * NOTICE: THIS CLASS IS NOT USED, BECAUSE A CONFLICT (MULTI-CONTEXTLOADER) WITH com.yummynoodlebar.configWebAppInitializer
  */
 public class WebAppInitializer implements WebApplicationInitializer
 {
@@ -28,11 +30,12 @@ public class WebAppInitializer implements WebApplicationInitializer
     @Override
     public void onStartup(ServletContext servletContext)
     {
-        WebApplicationContext rootContext = createRootContext(servletContext);
-
-        configureSpringMvc(servletContext, rootContext);
-
-        configureSpringSecurity(servletContext, rootContext);
+        // WebApplicationContext rootContext =
+        // createRootContext(servletContext);
+        //
+        // configureSpringMvc(servletContext, rootContext);
+        //
+        // configureSpringSecurity(servletContext, rootContext);
     }
 
     /*
@@ -81,7 +84,7 @@ public class WebAppInitializer implements WebApplicationInitializer
         {
             for (String s : mappingConflicts)
             {
-                LOG.error("Mapping conflict: " + s);
+                LOG.error("*** Mapping conflict: " + s);
             }
             throw new IllegalStateException(
                     "'webservice' cannot be mapped to '/'");
