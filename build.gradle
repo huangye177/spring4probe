@@ -120,7 +120,7 @@ task wrapper(type: Wrapper) {
 
 task run(type: JavaExec) {
   description = 'Runs a simple Gemfire Cache Server'
-  main = "com.yummynoodlebar.persistence.services.LocalGemfireServer"
+  main = "data.yummynoodlebar.persistence.services.LocalGemfireServer"
   classpath = sourceSets.main.runtimeClasspath
   standardInput = System.in
 }
