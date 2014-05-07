@@ -2,6 +2,7 @@ package com.yummynoodlebar.config;
 
 import javax.servlet.Filter;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -12,7 +13,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * 
  * The DispatcherServlet also orchestrates how each incoming request is channelled to the appropriate handler 
  * method on the available controllers
+ * 
+ * It is important that the Spring Security setup is done before the DispatcherServlet configuration 
+ * in WebAppInitializer. 
+ * The @Order annotation from Spring Core can be used to manage the order of execution
  */
+@Order(2)
 public class WebAppInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer
 {
@@ -25,7 +31,7 @@ public class WebAppInitializer extends
     @Override
     protected Class<?>[] getRootConfigClasses()
     {
-        return new Class<?>[] { PersistenceConfig.class, CoreConfig.class };
+        return new Class<?>[] { SecurityConfig.class, PersistenceConfig.class, CoreConfig.class };
     }
 
     /*

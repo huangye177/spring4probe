@@ -52,7 +52,7 @@ dependencies {
     
     compile 'org.springframework:spring-context:4.0.3.RELEASE'
     compile 'org.springframework:spring-webmvc:4.0.3.RELEASE'
-    compile 'org.springframework.security:spring-security-config:3.2.3.RELEASE'
+    compile 'org.springframework.security:spring-security-core:3.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-web:3.2.3.RELEASE'
     compile 'org.springframework.security:spring-security-config:3.2.3.RELEASE'
     compile 'org.springframework.data:spring-data-mongodb:1.4.1.RELEASE'
