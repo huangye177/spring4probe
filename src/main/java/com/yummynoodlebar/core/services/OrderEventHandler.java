@@ -1,74 +1,98 @@
 package com.yummynoodlebar.core.services;
 
-import com.yummynoodlebar.core.domain.Order;
-import com.yummynoodlebar.events.orders.*;
-import com.yummynoodlebar.persistence.services.OrderPersistenceService;
-
 import java.util.Date;
 import java.util.UUID;
 
-public class OrderEventHandler implements OrderService {
+import com.yummynoodlebar.core.domain.Order;
+import com.yummynoodlebar.events.orders.AllOrdersEvent;
+import com.yummynoodlebar.events.orders.CreateOrderEvent;
+import com.yummynoodlebar.events.orders.DeleteOrderEvent;
+import com.yummynoodlebar.events.orders.OrderCreatedEvent;
+import com.yummynoodlebar.events.orders.OrderDeletedEvent;
+import com.yummynoodlebar.events.orders.OrderDetailsEvent;
+import com.yummynoodlebar.events.orders.OrderStatusDetails;
+import com.yummynoodlebar.events.orders.OrderStatusEvent;
+import com.yummynoodlebar.events.orders.OrderUpdatedEvent;
+import com.yummynoodlebar.events.orders.RequestAllOrdersEvent;
+import com.yummynoodlebar.events.orders.RequestOrderDetailsEvent;
+import com.yummynoodlebar.events.orders.RequestOrderStatusEvent;
+import com.yummynoodlebar.events.orders.SetOrderPaymentEvent;
+import com.yummynoodlebar.events.orders.SetOrderStatusEvent;
+import com.yummynoodlebar.persistence.services.OrderPersistenceService;
 
-  private final OrderPersistenceService ordersPersistenceService;
+public class OrderEventHandler implements OrderService
+{
 
-  public OrderEventHandler(final OrderPersistenceService ordersPersistenceService) {
-    this.ordersPersistenceService = ordersPersistenceService;
-  }
+    private final OrderPersistenceService ordersPersistenceService;
 
-  @Override
-  public OrderCreatedEvent createOrder(CreateOrderEvent createOrderEvent) {
-
-    //TODO, add validation of menu items
-    //TODO, add order total calculation
-    //TODO, add order time estimate calculation
-	//TODO  Think transaction boundary. Order and OrderStatus should be atomic
-    OrderCreatedEvent event = ordersPersistenceService.createOrder(createOrderEvent);
-
-    //TODO, where should this go?
-    OrderStatusEvent orderStatusEvent = ordersPersistenceService.setOrderStatus(
-            new SetOrderStatusEvent(event.getNewOrderKey(), new OrderStatusDetails(event.getNewOrderKey(),
-            UUID.randomUUID(), new Date(), "Order Created")));
-
-    return event;
-  }
-
-  @Override
-  public AllOrdersEvent requestAllOrders(RequestAllOrdersEvent requestAllCurrentOrdersEvent) {
-    return ordersPersistenceService.requestAllOrders(requestAllCurrentOrdersEvent);
-  }
-
-  @Override
-  public OrderDetailsEvent requestOrderDetails(RequestOrderDetailsEvent requestOrderDetailsEvent) {
-    return ordersPersistenceService.requestOrderDetails(requestOrderDetailsEvent);
-  }
-
-  @Override
-  public OrderUpdatedEvent setOrderPayment(SetOrderPaymentEvent setOrderPaymentEvent) {
-    return ordersPersistenceService.setOrderPayment(setOrderPaymentEvent);
-  }
-
-  @Override
-  public OrderDeletedEvent deleteOrder(DeleteOrderEvent deleteOrderEvent) {
-
-    OrderDetailsEvent orderDetailsEvent = ordersPersistenceService.requestOrderDetails(new RequestOrderDetailsEvent(deleteOrderEvent.getKey()));
-
-    if (!orderDetailsEvent.isEntityFound()) {
-      return OrderDeletedEvent.notFound(deleteOrderEvent.getKey());
+    public OrderEventHandler(final OrderPersistenceService ordersPersistenceService)
+    {
+        this.ordersPersistenceService = ordersPersistenceService;
     }
 
-    Order order = Order.fromOrderDetails(orderDetailsEvent.getOrderDetails());
+    @Override
+    public OrderCreatedEvent createOrder(CreateOrderEvent createOrderEvent)
+    {
 
-    if (!order.canBeDeleted()) {
-      return OrderDeletedEvent.deletionForbidden(deleteOrderEvent.getKey(), order.toOrderDetails());
+        // TODO, add validation of menu items
+        // TODO, add order total calculation
+        // TODO, add order time estimate calculation
+        // TODO Think transaction boundary. Order and OrderStatus should be
+        // atomic
+        OrderCreatedEvent event = ordersPersistenceService.createOrder(createOrderEvent);
+
+        // TODO, where should this go?
+        OrderStatusEvent orderStatusEvent = ordersPersistenceService.setOrderStatus(
+                new SetOrderStatusEvent(event.getNewOrderKey(), new OrderStatusDetails(event.getNewOrderKey(),
+                        UUID.randomUUID(), new Date(), "Order Created")));
+
+        return event;
     }
 
-    ordersPersistenceService.deleteOrder(deleteOrderEvent);
+    @Override
+    public AllOrdersEvent requestAllOrders(RequestAllOrdersEvent requestAllCurrentOrdersEvent)
+    {
+        return ordersPersistenceService.requestAllOrders(requestAllCurrentOrdersEvent);
+    }
 
-    return new OrderDeletedEvent(deleteOrderEvent.getKey(), order.toOrderDetails());
-  }
+    @Override
+    public OrderDetailsEvent requestOrderDetails(RequestOrderDetailsEvent requestOrderDetailsEvent)
+    {
+        return ordersPersistenceService.requestOrderDetails(requestOrderDetailsEvent);
+    }
 
-  @Override
-  public OrderStatusEvent requestOrderStatus(RequestOrderStatusEvent requestOrderDetailsEvent) {
-    return ordersPersistenceService.requestOrderStatus(requestOrderDetailsEvent);
-  }
+    @Override
+    public OrderUpdatedEvent setOrderPayment(SetOrderPaymentEvent setOrderPaymentEvent)
+    {
+        return ordersPersistenceService.setOrderPayment(setOrderPaymentEvent);
+    }
+
+    @Override
+    public OrderDeletedEvent deleteOrder(DeleteOrderEvent deleteOrderEvent)
+    {
+
+        OrderDetailsEvent orderDetailsEvent = ordersPersistenceService.requestOrderDetails(new RequestOrderDetailsEvent(deleteOrderEvent.getKey()));
+
+        if (!orderDetailsEvent.isEntityFound())
+        {
+            return OrderDeletedEvent.notFound(deleteOrderEvent.getKey());
+        }
+
+        Order order = Order.fromOrderDetails(orderDetailsEvent.getOrderDetails());
+
+        if (!order.canBeDeleted())
+        {
+            return OrderDeletedEvent.deletionForbidden(deleteOrderEvent.getKey(), order.toOrderDetails());
+        }
+
+        ordersPersistenceService.deleteOrder(deleteOrderEvent);
+
+        return new OrderDeletedEvent(deleteOrderEvent.getKey(), order.toOrderDetails());
+    }
+
+    @Override
+    public OrderStatusEvent requestOrderStatus(RequestOrderStatusEvent requestOrderDetailsEvent)
+    {
+        return ordersPersistenceService.requestOrderStatus(requestOrderDetailsEvent);
+    }
 }
