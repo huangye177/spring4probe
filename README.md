@@ -24,7 +24,7 @@ database installation:
 
 start a basic GemFire server with a Region **on port 40404** -- a logical partition within GemFire named as 'YummyNoodleOrder'
 
-##### [ Optional ] run from web container:
+##### run from web container:
 
 * `gradle build tomcatRunWar` 
 
@@ -32,7 +32,7 @@ start a basic GemFire server with a Region **on port 40404** -- a logical partit
 
 (alternative by comment `com.yummynoodlebar.config.WebAppInitializer` to ensure use of `rest.yummynoodlebar.config.WebAppInitializer`) visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http"
 
-##### [ Optional/Recommended ] run from tests:
+##### run from tests:
 
 * `gradle clean test` 
 
