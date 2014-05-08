@@ -15,6 +15,7 @@ build
 .groovy
 gradle-app.setting
 
+uploaded
 *.log
 *.class
 *.war

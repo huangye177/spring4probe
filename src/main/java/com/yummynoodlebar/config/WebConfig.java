@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,7 +21,8 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.yummynoodlebar.web.controller", "com.yummynoodlebar.web.domain" })
+@ComponentScan(basePackages = { "com.yummynoodlebar.web.controller", "com.yummynoodlebar.web.domain",
+        "io.spring.uploadingfiles" })
 public class WebConfig extends WebMvcConfigurerAdapter
 {
     /*
@@ -104,6 +106,12 @@ public class WebConfig extends WebMvcConfigurerAdapter
         // # -1 : never reload, 0 always reload
         messageSource.setCacheSeconds(0);
         return messageSource;
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver()
+    {
+        return new org.springframework.web.multipart.commons.CommonsMultipartResolver();
     }
 
 }
