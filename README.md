@@ -18,13 +18,13 @@ database installation:
 
 * `mongod`
 
-##### [ **Must** ] run a GemFire server
+##### [ **Must** ] run a Gemfire Server
 
-* `gradle run` 
+* `gradle runGemfire` 
 
 start a basic GemFire server with a Region **on port 40404** -- a logical partition within GemFire named as 'YummyNoodleOrder'
 
-##### run from web container:
+##### [ **Recommended** ] run from web container:
 
 * `gradle build tomcatRunWar` 
 
@@ -32,11 +32,21 @@ start a basic GemFire server with a Region **on port 40404** -- a logical partit
 
 (alternative by comment `com.yummynoodlebar.config.WebAppInitializer` to ensure use of `rest.yummynoodlebar.config.WebAppInitializer`) visit http://localhost:8080/aggregators/orders to get an empty page with "[]" through HTTP authentication "http:http"
 
-##### run from tests:
+##### [ **Recommended** ] run from tests:
 
 * `gradle clean test` 
 
 primary test cases: `rest.yummynoodlebar.rest.controller`, `data.yummynoodlebar.persistence.integration`, `com.yummynoodlebar.web.controller`
+
+##### [ **Optional** ] run application directly:
+
+* `gradle [runAPP]`
+
+for example: `gradle runScheduleTaskApp`
+
+Other APP options: runScheduleTaskApp; runConsumeRESTApp; 
+
+code package: `io.spring` 
 
 ============
 
@@ -49,3 +59,8 @@ included tutorials:
 * "**data.yummynoodlebar**" MongoDB persistent via MongoTemplate and Spring Data repository hierarchy (e.g., CrudRepository); config class to map to a JPA database, and use Spring Data JPA Repository to store and retrieve data from H2 database; support GemFire by launching a local cache server to save/retreive objects with GemFireTemplate OQL and GemfireRepository; support of calable and event-driven architecture (propagated message across application cluster) with GemFire Continuous Queries. [from http://spring.io/guides/tutorials/data/]
 
 * "**com.yummynoodlebar**" SpringMVC based configuration via AbstractAnnotationConfigDispatcherServletInitializer, controller and mapping; Spring Components with multi-scopes (singleton and HttpSession); use of view-fragments supported Thymeleaf viewResolver; inject Spring MVC model into view; MockMVC to ensure attributes existence in view's model() and url forwarding/redirecting; @ModelAttribute based command object mapping between controller and view page with validation support; HTML-form, in-header-cookie JSESSIONID session, and filter-chain based Spring Security authentication with customized rules. [from http://spring.io/guides/tutorials/web/]
+
+* "**io.Spring**" A list of Spring feature testings from Spring guide [http://spring.io/guides]
+
+
+

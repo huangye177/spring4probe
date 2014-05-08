@@ -50,6 +50,8 @@ dependencies {
       exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
     }
     
+    // compile 'org.springframework.boot:spring-boot-starter-web:1.0.2.RELEASE'
+    
     compile 'org.springframework:spring-context:4.0.3.RELEASE'
     compile 'org.springframework:spring-webmvc:4.0.3.RELEASE'
     compile 'org.springframework.security:spring-security-core:3.2.3.RELEASE'
@@ -110,6 +112,10 @@ dependencies {
     compile 'commons-logging:commons-logging:1.1.1'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
     
+    compile 'org.apache.httpcomponents:httpcore:4.3.2'
+    compile 'org.apache.httpcomponents:httpclient:4.3.3'
+    compile 'org.apache.httpcomponents:httpmime:4.3.3'
+    
     // compile 'org.thymeleaf:thymeleaf-spring3:2.0.18'
     // testCompile 'org.springframework:spring-test:3.2.3.RELEASE'
     
@@ -134,12 +140,27 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.10'
 }
 
-task run(type: JavaExec) {
+jettyRunWar.contextPath = ''
+tomcatRunWar.contextPath = ''
+
+task runGemfire(type: JavaExec) {
   description = 'Runs a simple Gemfire Cache Server'
   main = "data.yummynoodlebar.persistence.services.LocalGemfireServer"
   classpath = sourceSets.main.runtimeClasspath
   standardInput = System.in
 }
 
-jettyRunWar.contextPath = ''
-tomcatRunWar.contextPath = ''
+task runConsumeRESTApp(type: JavaExec) {
+    description = 'Run ConsumeRESTApp'
+    main = "io.spring.consumerest.ConsumeRESTApp"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task runScheduleTaskApp(type: JavaExec) {
+    description = 'Run ScheduleTaskApp'
+    main = "io.spring.schedulingtask.ScheduleTaskApp"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
