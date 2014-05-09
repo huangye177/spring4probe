@@ -10,7 +10,7 @@ Service installation:
 
 * H2
 
-* Redis (http://redis.io/download)
+* Redis
 
 ============
 
