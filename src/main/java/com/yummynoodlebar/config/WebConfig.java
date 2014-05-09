@@ -108,6 +108,9 @@ public class WebConfig extends WebMvcConfigurerAdapter
         return messageSource;
     }
 
+    /*
+     * Multi-part content resolver (for example: file upload from web form)
+     */
     @Bean
     public MultipartResolver multipartResolver()
     {

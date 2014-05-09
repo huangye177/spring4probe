@@ -4,11 +4,13 @@
 
 ## Prerequisites 
 
-database installation:
+Service installation:
 
 * MongoDB 
 
 * H2
+
+* Redis (http://redis.io/download)
 
 ============
 
@@ -16,13 +18,17 @@ database installation:
 
 ##### [ **Must** ] Start MongoDB
 
-* `mongod`
+* `mongod` (in MongoDB directory)
 
-##### [ **Must** ] run a Gemfire Server
+##### [ **Must** ] run a Gemfire Server (for Gemfire test cases)
 
 * `gradle runGemfire` 
 
 start a basic GemFire server with a Region **on port 40404** -- a logical partition within GemFire named as 'YummyNoodleOrder'
+
+##### [ **Must** ] run a Redis Server (for Redis test cases)
+
+* `src/redis-server` (in Redis directory)
 
 ##### [ **Recommended** ] run from web container:
 
@@ -42,7 +48,7 @@ primary test cases: `rest.yummynoodlebar.rest.controller`, `data.yummynoodlebar.
 
 * `gradle [runAPP]` (for example: `gradle runScheduleTaskApp`)
 
-Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; 
+Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; `runRedisApp`; 
 
 code package: `io.spring` 
 
@@ -58,11 +64,11 @@ included tutorials:
 
 * "**com.yummynoodlebar**" SpringMVC based configuration via AbstractAnnotationConfigDispatcherServletInitializer, controller and mapping; Spring Components with multi-scopes (singleton and HttpSession); use of view-fragments supported Thymeleaf viewResolver; inject Spring MVC model into view; MockMVC to ensure attributes existence in view's model() and url forwarding/redirecting; @ModelAttribute based command object mapping between controller and view page with validation support; HTML-form, in-header-cookie JSESSIONID session, and filter-chain based Spring Security authentication with customized rules. [from http://spring.io/guides/tutorials/web/]
 
-* "**io.Spring**" A list of Spring feature testings from Spring guide, including: Scheduling Tasks; Consuming a RESTful Web Service; Uploading Files (integrated into gradle tomcatRunWar); [http://spring.io/guides]
+* "**io.Spring**" A list of Spring feature testings from Spring guide, including: Scheduling Tasks; Consuming a RESTful Web Service; Uploading Files (integrated into gradle tomcatRunWar); Messaging with Redis; [http://spring.io/guides]
 
 * More incoming:
 
->Messaging with Redis; Messaging with RabbitMQ; Messaging with JMS; Consuming a SOAP web service; Managing Transactions (via JdbcTemplate); Accessing Data with JPA; Accessing Data with MongoDB; Accessing JPA Data with REST; Creating a Batch Service; Application with Reactor; Using WebSocket; Uploading pictures with Reactor;
+>Messaging with RabbitMQ; Messaging with JMS; Consuming a SOAP web service; Managing Transactions (via JdbcTemplate); Accessing Data with JPA; Accessing Data with MongoDB; Accessing JPA Data with REST; Creating a Batch Service; Application with Reactor; Using WebSocket; Uploading pictures with Reactor;
 
 
 
