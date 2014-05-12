@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 /*
  * Redis not only provides a NoSQL data store, but a messaging system as well
  */
-public class Receiver
+public class RedisReceiver
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisReceiver.class);
 
     private CountDownLatch latch;
 
@@ -23,7 +23,7 @@ public class Receiver
      * can signal when it has received a message.
      */
     @Autowired
-    public Receiver(CountDownLatch latch)
+    public RedisReceiver(CountDownLatch latch)
     {
         this.latch = latch;
     }

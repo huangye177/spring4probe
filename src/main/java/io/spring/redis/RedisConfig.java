@@ -16,7 +16,7 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
  * A message listener container
  * A Redis template
  * 
- * You’ll use the Redis template to send messages and you will register the Receiver with the message listener container 
+ * You will use the Redis template to send messages and you will register the Receiver with the message listener container 
  * so that it will receive messages;
  * 
  * The connection factory drives both the template and the message listener container, 
@@ -56,7 +56,7 @@ public class RedisConfig
      * by addMessageListener()
      */
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver)
+    MessageListenerAdapter listenerAdapter(RedisReceiver receiver)
     {
         /*
          * The message listener adapter is also configured to call the
@@ -69,9 +69,9 @@ public class RedisConfig
      * prepare the POJO class based message receiver
      */
     @Bean
-    Receiver receiver(CountDownLatch latch)
+    RedisReceiver receiver(CountDownLatch latch)
     {
-        return new Receiver(latch);
+        return new RedisReceiver(latch);
     }
 
     @Bean

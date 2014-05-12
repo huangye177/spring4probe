@@ -128,6 +128,9 @@ dependencies {
     // Redis access
     compile 'org.springframework.data:spring-data-redis:1.2.1.RELEASE'
     compile 'redis.clients:jedis:2.4.2'
+	
+	// RabbitMQ
+	compile 'org.springframework.amqp:spring-rabbit:1.3.2.RELEASE'
     
     // view template
     compile 'org.thymeleaf:thymeleaf-spring4:2.0.20'
@@ -182,5 +185,12 @@ task runRedisApp(type: JavaExec) {
     main = "io.spring.redis.RedisApp"
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
+}
+
+task runRabbitMQApp(type: JavaExec) {
+	description = 'Run RabbitMQApp'
+	main = "io.spring.rabbitmq.RabbitMQApp"
+	classpath = sourceSets.main.runtimeClasspath
+	standardInput = System.in
 }
 

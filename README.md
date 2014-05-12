@@ -30,6 +30,12 @@ start a basic GemFire server with a Region **on port 40404** -- a logical partit
 
 * `src/redis-server` (in Redis directory)
 
+##### [ **Must** ] run a RabbitMQ Server (for RabbitMQ test cases)
+
+* `sbin/rabbitmq-server` (in RabbitMQ directory)
+
+>associated commands: `rabbitmqctl stop`; you might also want to check the allow net interface in `/usr/local/etc/rabbitmq/rabbitmq-env.conf`
+
 ##### [ **Recommended** ] run from web container:
 
 * `gradle build tomcatRunWar` 
@@ -48,7 +54,7 @@ primary test cases: `rest.yummynoodlebar.rest.controller`, `data.yummynoodlebar.
 
 * `gradle [runAPP]` (for example: `gradle runScheduleTaskApp`)
 
-Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; `runRedisApp`; 
+Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; `runRedisApp`; `runRabbitMQApp`; 
 
 code package: `io.spring` 
 
@@ -64,11 +70,11 @@ included tutorials:
 
 * "**com.yummynoodlebar**" SpringMVC based configuration via AbstractAnnotationConfigDispatcherServletInitializer, controller and mapping; Spring Components with multi-scopes (singleton and HttpSession); use of view-fragments supported Thymeleaf viewResolver; inject Spring MVC model into view; MockMVC to ensure attributes existence in view's model() and url forwarding/redirecting; @ModelAttribute based command object mapping between controller and view page with validation support; HTML-form, in-header-cookie JSESSIONID session, and filter-chain based Spring Security authentication with customized rules. [from http://spring.io/guides/tutorials/web/]
 
-* "**io.Spring**" A list of Spring feature testings from Spring guide, including: Scheduling Tasks; Consuming a RESTful Web Service; Uploading Files (integrated into gradle tomcatRunWar); Messaging with Redis; [http://spring.io/guides]
+* "**io.Spring**" A list of Spring feature testings from Spring guide, including: Scheduling Tasks; Consuming a RESTful Web Service; Uploading Files (integrated into gradle tomcatRunWar); Messaging with Redis; Messaging with RabbitMQ; [http://spring.io/guides]
 
 * More incoming:
 
->Messaging with RabbitMQ; Messaging with JMS; Consuming a SOAP web service; Managing Transactions (via JdbcTemplate); Accessing Data with JPA; Accessing Data with MongoDB; Accessing JPA Data with REST; Creating a Batch Service; Application with Reactor; Using WebSocket; Uploading pictures with Reactor;
+>Messaging with JMS; Consuming a SOAP web service; Managing Transactions (via JdbcTemplate); Accessing Data with JPA; Accessing Data with MongoDB; Accessing JPA Data with REST; Creating a Batch Service; Application with Reactor; Using WebSocket; Uploading pictures with Reactor;
 
 
 
