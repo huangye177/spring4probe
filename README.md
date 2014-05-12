@@ -58,7 +58,7 @@ primary test cases: `rest.yummynoodlebar.rest.controller`, `data.yummynoodlebar.
 
 * `gradle [runAPP]` (for example: `gradle runScheduleTaskApp`)
 
-Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; `runRedisApp`; `runRabbitMQApp`; 
+Other APP options: `runScheduleTaskApp`; `runConsumeRESTApp`; `runRedisApp`; `runRabbitMQApp`; `runJMSApp`;
 
 code package: `io.spring` 
 

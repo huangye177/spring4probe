@@ -199,3 +199,10 @@ task runRabbitMQApp(type: JavaExec) {
 	standardInput = System.in
 }
 
+task runJMSApp(type: JavaExec) {
+	description = 'Run JMSApp'
+	main = "io.spring.jms.JMSApp"
+	classpath = sourceSets.main.runtimeClasspath
+	standardInput = System.in
+}
+

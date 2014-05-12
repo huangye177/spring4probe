@@ -6,6 +6,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -13,11 +14,7 @@ import org.springframework.util.FileSystemUtils;
 
 public class JMSApp {
 	
-	static String mailboxDestination = "mailbox-destination";
-	
 	public static void main(String[] args) {
-        // Clean out any ActiveMQ data from a previous run
-        FileSystemUtils.deleteRecursively(new File("activemq-data"));
 
         // Launch the application
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
@@ -37,8 +34,14 @@ public class JMSApp {
                 return session.createTextMessage("* ping!");
             }
         };
+        
+        
         JmsTemplate jmsTemplate = ctx.getBean(JmsTemplate.class);
+        ActiveMQQueue queue = ctx.getBean(ActiveMQQueue.class);
+        
         System.out.println("* Sending a new message.");
-        jmsTemplate.send(mailboxDestination, messageCreator);
+        jmsTemplate.send(queue, messageCreator);
+        System.out.println("* Message sent.");
+        
     }
 }

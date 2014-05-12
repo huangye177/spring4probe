@@ -20,6 +20,5 @@ public class JMSReceiver {
     public void receiveMessage(String message) {
         System.out.println("* Received <" + message + ">");
         context.close();
-        FileSystemUtils.deleteRecursively(new File("activemq-data"));
     }
 }

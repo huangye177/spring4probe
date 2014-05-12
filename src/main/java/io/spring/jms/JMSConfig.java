@@ -1,11 +1,14 @@
 package io.spring.jms;
 
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.SimpleMessageListenerContainer;
@@ -21,20 +24,30 @@ import org.springframework.jms.listener.adapter.MessageListenerAdapter;
  */
 @Configuration
 public class JMSConfig {
-	static String mailboxDestination = "mailbox-destination";
+	
+	static String queueName = "myQueue";
 
+	@Autowired
+	JmsTemplate jmsTemplate;
+	
     @Bean
     JMSReceiver receiver() {
         return new JMSReceiver();
     }
 
+    @Bean
+    ActiveMQQueue queue() {
+    	return new ActiveMQQueue(queueName);
+    }
+    
     /*
-     * configure which method to invoke when a message comes in. Thus you avoid implementing any JMS or broker-specific interfaces
+     * configure which method to invoke when a message comes in. 
+     * Thus you avoid implementing any JMS or broker-specific interfaces
      */
     @Bean
     MessageListenerAdapter adapter(JMSReceiver receiver) {
-        MessageListenerAdapter messageListener
-                = new MessageListenerAdapter(receiver);
+    	
+        MessageListenerAdapter messageListener = new MessageListenerAdapter(receiver);
         messageListener.setDefaultListenerMethod("receiveMessage");
         return messageListener;
     }
@@ -47,33 +60,30 @@ public class JMSConfig {
      * Another parameter is the queue name set in mailboxDestination. It is also set up to receive messages in a publish/subscribe fashion
      */
     @Bean
-    SimpleMessageListenerContainer container(MessageListenerAdapter messageListener,
-                                             ConnectionFactory connectionFactory) {
+    SimpleMessageListenerContainer container(MessageListenerAdapter messageListener, ConnectionFactory connectionFactory, ActiveMQQueue queue) {
+    	
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setMessageListener(messageListener);
         container.setConnectionFactory(connectionFactory);
-        container.setDestinationName(mailboxDestination);
+        container.setDestination(queue);
         container.setPubSubDomain(true);
+        
         return container;
     }
     
     @Bean
     ActiveMQConnectionFactory amqConnectionFactory()
     {
-        return new ActiveMQConnectionFactory("failover:(tcp://localhost:61616)?timeout=1000");
+    	return new ActiveMQConnectionFactory("tcp://localhost:61616");
     }
-    
-//    @Bean
-//    CachingConnectionFactory connectionFactory()
-//    {
-//        return new CachingConnectionFactory();
-//    }
     
     /*
      * JmsTemplate makes it very simple to send messages to a JMS message queue
      */
     @Bean
-    JmsTemplate template(ConnectionFactory connectionFactory) {
-    	return new JmsTemplate(connectionFactory);
+    JmsTemplate template(ConnectionFactory connectionFactory, ActiveMQQueue queue) {
+    	JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
+    	jmsTemplate.setDefaultDestination(queue);
+    	return jmsTemplate;
     }
 }
