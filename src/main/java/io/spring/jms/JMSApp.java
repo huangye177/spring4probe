@@ -1,7 +1,5 @@
 package io.spring.jms;
 
-import java.io.File;
-
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
@@ -10,7 +8,6 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import org.springframework.util.FileSystemUtils;
 
 public class JMSApp {
 	

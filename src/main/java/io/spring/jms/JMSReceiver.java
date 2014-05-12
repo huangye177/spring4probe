@@ -2,8 +2,6 @@ package io.spring.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.util.FileSystemUtils;
-import java.io.File;
 
 public class JMSReceiver {
 
