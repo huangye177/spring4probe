@@ -28,17 +28,17 @@ start a basic GemFire server with a Region **on port 40404** -- a logical partit
 
 ##### [ **Optional** ] run a Redis Server (for Redis test cases)
 
-* `src/redis-server` (in Redis directory)
+* `bin/redis-server` (in Redis directory, e.g., `/usr/local/Cellar/redis/2.8.9` on Mac via brew)
 
 ##### [ **Optional** ] run a RabbitMQ Server (for RabbitMQ test cases)
 
-* `sbin/rabbitmq-server` (in RabbitMQ directory)
+* `sbin/rabbitmq-server` (in RabbitMQ directory, e.g., `/usr/local/sbin/` on Mac via brew)
 
 >associated commands: `rabbitmqctl stop`; you might also want to check the allow net interface in `/usr/local/etc/rabbitmq/rabbitmq-env.conf`
 
 ##### [ **Optional** ] run a ActiveMQ Server (for JMS/ActiveMQ test cases)
 
-* `./activemq start` (in ActiveMQ directory)
+* `bin/activemq start` (in ActiveMQ directory, e.g., `/usr/local/Cellar/activemq/5.9.1/` on Mac via brew)
 
 ##### [ **Recommended** ] run from web container:
 
