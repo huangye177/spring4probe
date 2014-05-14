@@ -206,3 +206,23 @@ task runJMSApp(type: JavaExec) {
 	standardInput = System.in
 }
 
+task runSOAPServerApp(type: JavaExec) {
+    description = 'Run SOAPServerApp'
+    main = "io.spring.soap.SOAPPublisher"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task runSOAPClientApp(type: JavaExec) {
+    description = 'Run SOAPClientApp'
+    main = "io.spring.soap.SOAPClient"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task runSOAPWsimportClientApp(type: JavaExec) {
+    description = 'Run SOAPWsimportClientApp'
+    main = "io.spring.soap.client.SOAPWsimportClient"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
