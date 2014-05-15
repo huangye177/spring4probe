@@ -230,3 +230,10 @@ task runSOAPWsimportClientApp(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
 }
+
+task runJDBCTxApp(type: JavaExec) {
+	description = 'Run JDBCTxApp'
+	main = "io.spring.jdbctx.JDBCTxApp"
+	classpath = sourceSets.main.runtimeClasspath
+	standardInput = System.in
+}
