@@ -244,3 +244,12 @@ task runDataJPAApp(type: JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 	standardInput = System.in
 }
+
+task runDataMongoDBApp(type: JavaExec) {
+	description = 'Run DataMongoDBApp'
+	main = "io.spring.datamongodb.DataMongoDBApp"
+	classpath = sourceSets.main.runtimeClasspath
+	standardInput = System.in
+}
+
+
