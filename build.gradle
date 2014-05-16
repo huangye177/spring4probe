@@ -237,3 +237,10 @@ task runJDBCTxApp(type: JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 	standardInput = System.in
 }
+
+task runDataJPAApp(type: JavaExec) {
+	description = 'Run DataJPAApp'
+	main = "io.spring.datajpa.DataJPAApp"
+	classpath = sourceSets.main.runtimeClasspath
+	standardInput = System.in
+}
