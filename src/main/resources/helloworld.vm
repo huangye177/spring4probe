@@ -1,1 +1,10 @@
 Hello $name!  Welcome to Velocity!
+
+$petList.size() Pets on Sale!
+We are proud to offer these fine pets
+at these amazing prices.  This month only,
+choose from:
+#foreach( $pet in $petList )
+    $pet.name for only $pet.price
+#end
+Call Today!
