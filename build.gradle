@@ -139,7 +139,8 @@ dependencies {
     
     // view template
     compile 'org.thymeleaf:thymeleaf-spring4:2.0.20'
-    
+    compile 'org.apache.velocity:velocity:1.7'
+
     // testing
     testCompile 'org.springframework:spring-test:4.0.3.RELEASE'
     

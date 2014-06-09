@@ -22,5 +22,6 @@ uploaded
 *.ear
 vf.gf.dmn*
 
+out
 .idea
-.iml
+*.iml
