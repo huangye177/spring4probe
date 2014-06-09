@@ -21,3 +21,6 @@ uploaded
 *.war
 *.ear
 vf.gf.dmn*
+
+.idea
+.iml
